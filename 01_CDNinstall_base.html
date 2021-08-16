@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01_CDNinstall_base</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{msg}}</h1>
+      <h3>{{count}}</h3>
+      <span :title="title">Show Time</span>
+      <input type="text" v-model="msg" />
+      <button @click="reverseMsg">reverseMsg</button>
+      <hr />
+      <button @click="showHandle">change Show</button>
+      <p v-if="isShow">你看到我了</p>
+       <p v-show="isShow">你看到我了</p>
+      <hr />
+      <ul>
+        <li v-for="(item,index) of todos" :key="index">{{item.text}}</li>
+      </ul>
+    </div>
+    <div id="app2">
+      <p :title="msg">123</p>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const App = {
+        data() {
+          return {
+            msg: "HI VUE3!!!",
+            count: 0,
+            title: `IT IS ${new Date().toLocaleTimeString()}`,
+            isShow: false,
+            todos: [
+              { text: "Learn JavaScript" },
+              { text: "Learn Vue" },
+              { text: "Build something awesome" },
+            ],
+          };
+        },
+        mounted() {
+          setInterval(() => {
+            this.count++;
+          }, 1000);
+        },
+        methods: {
+          reverseMsg() {
+            this.msg = this.msg.split("").reverse().join("");
+          },
+          showHandle() {
+            this.isShow = !this.isShow;
+          },
+        },
+      };
+      Vue.createApp(App).mount("#app");
+
+      const app2={
+        data() {
+          return {
+            msg:"title"
+          }
+        },
+      }
+
+      Vue.createApp(app2).mount('#app2')
+    </script>
+  </body>
+</html>

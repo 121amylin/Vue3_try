@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02_CDNinstall_component</title>
+  </head>
+  <body>
+    <div id="app">
+      <btn></btn>
+      <btn></btn>
+      <btn></btn>
+      <btn></btn>
+      <element :text="123"></element>
+      <element :text="456"></element>
+      <element :text="789"></element>
+
+      <ul>
+        <post-list v-for="item in posts" :key="item.id" :descript="item.title" ></post-list>
+      </ul>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const App = Vue.createApp({
+        data() {
+          return {
+            posts: [
+              { id: 1, title: "My journey with Vue" },
+              { id: 2, title: "Blogging with Vue" },
+              { id: 3, title: "Why Vue is so fun" },
+            ],
+          };
+        },
+      });
+      App.component("btn", {
+        data() {
+          return {
+            count: 0,
+          };
+        },
+        template: `<button @click="add">btn {{count}}</button>`,
+        methods: {
+          add() {
+            this.count++;
+          },
+        },
+      });
+
+      App.component("element", {
+        props: ["text"],
+        template: `<p>{{text}}</p>`,
+      });
+      App.component("post-list",{
+        props:["descript"],
+        template:`<li>{{descript}}</li>`
+      })
+      App.mount("#app");
+    </script>
+  </body>
+</html>
