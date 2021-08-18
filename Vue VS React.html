@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue VS React</title>
+</head>
+
+<body>
+  <div id="Vue"><h3>{{msg}}</h3></div>
+
+  <div id="React"></div>
+
+  <!-- Vue CDN start -->
+  <script src="https://unpkg.com/vue@next"></script>
+  <!-- Vue CDN end -->
+
+
+  <!-- React CDN start -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <!-- React CDN end -->
+
+
+  <script>
+    const App = Vue.createApp({
+      data() {
+        return {
+          msg: 'Vue text'
+        }
+      }
+    })
+
+    App.mount("#Vue")
+    
+  </script>
+
+
+  <script type="text/babel">
+    const init = document.querySelector("#React")
+    const Element=<h3>React text</h3>
+    ReactDOM.render(Element,init)
+  </script>
+</body>
+
+</html>

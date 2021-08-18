@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>props</title>
+</head>
+
+<body>
+  <div id="app">
+    <component_a :props_msg="root_msg"></component_a>
+  </div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js'
+    integrity='sha512-PyKhbAWS+VlTWXjk/36s5hJmUJBxcGY/1hlxg6woHD/EONP2fawZRKmvHdTGOWPKTqk3CPSUPh7+2boIBklbvw=='
+    crossorigin='anonymous'></script>
+  <script>
+    const component_a = {
+      props: ["props_msg"],
+      template: `<div>
+            <p>{{props_msg}}</p>
+            <button @click="changeText">changeText</button>
+            
+            </div>`,
+      methods: {
+        changeText() {
+          this.props_msg = "QQQQ"
+        }
+      }
+    }
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+          root_msg: "li is root msg."
+        }
+      },
+      components: {
+        component_a
+      }
+    })
+  </script>
+</body>
+
+</html>

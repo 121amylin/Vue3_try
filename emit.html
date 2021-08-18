@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>emit</title>
+</head>
+
+<body>
+  <div id="app">
+
+    <ul style="padding-left: 0;">
+      <li>Material: Reynolds 853</li>
+      <li>Type: 700C Racing</li>
+      <li>Top tube, seat tube, down tube are  Rynolds 853 tubing.</li>
+      <li>Brake system: Caliper brake</li>
+      <li>Size: By order</li>
+    </ul>
+
+<ul style="padding-left: 0;">
+  <li>Material: 4130 CR-MO</li>
+  <li>Type: 700C Single speed</li>
+  <li>Brake system: Caliper brake</li>
+  <li>Size: By order</li>
+</ul>
+
+
+<ul style="padding-left: 0;">
+  <li>Steerer Tube : 1-1/8 “</li>
+  <li>Blade : Ø24 Cr-mo Seamless</li>
+  <li>Crown/ Dropout : Casting</li>
+</ul>
+    
+
+<ul  style="padding-left: 0;">
+  <li>Steerer Tube : 1-1/8 “</li>
+  <li>Blade : Tear drop shape</li>
+  <li>Dropout : Forge</li>
+</ul>
+
+
+    <component_a @paren_handle="consoleTextHandle">
+      <component_b @component_a_handle="a_handle"></component_b>
+    </component_a>
+  </div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js'
+    integrity='sha512-PyKhbAWS+VlTWXjk/36s5hJmUJBxcGY/1hlxg6woHD/EONP2fawZRKmvHdTGOWPKTqk3CPSUPh7+2boIBklbvw=='
+    crossorigin='anonymous'></script>
+  <script>
+
+    const component_b = {
+      template: `<div>
+        <p>component_b</p>
+        <button @click="deliverHandle">call component_a</button>
+        </div>`,
+      methods: {
+        deliverHandle() {
+          this.$emit('component_a_handle', "從B發出的事件")
+        }
+      }
+    }
+
+    const component_a = {
+      template: `<div>
+        <p>component_a</p>
+        <button @click="deliverHandle">call parent</button>
+        <slot></slot>
+        </div>`,
+      methods: {
+        deliverHandle() {
+          this.$emit('paren_handle', "從a發出的事件")
+        }
+      }
+    }
+
+    new Vue({
+      el: "#app",
+      components: { component_a, component_b },
+      methods: {
+        consoleTextHandle(text) {
+          console.log(text)
+        },
+        a_handle(text) {
+          console.log(text)
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
