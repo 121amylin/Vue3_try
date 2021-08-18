@@ -1,6 +1,8 @@
 #### Vue2  VS Vue3
 - 引入方式
 - 组合式 API / Composition API
+ - Vue3 EventBus、Mixins不建議使用
+ - 移除$on、$off用法；改用mitt取代EventBus
 
 
 
@@ -15,6 +17,7 @@
 - 自動引入用到的模塊
 
 - [How used ref with CDN](https://github.com/vuejs/docs/issues/786) 
+用ES6解構語法取出來
 ```javascript
 const { ref } = Vue
 ```
@@ -26,10 +29,18 @@ const { ref } = Vue
 - return {} // 這裡返回的任何內容都可以用於組件的其餘部分
 - reactive 方法建立響應式物件
   Proxy實現
-  深度轉換
+  深度轉換、監控
 - ref 方法建立響應式變數
+  資料是物件型別的話，預設不會深度監控，要用{deep:true}  (最好不要這樣用，會整包掃)
   回傳的 Ref 物件在模板中訪問時是被自動解開的，因此不需要在模板中使用 .value
   如果將 Ref 物件分配給響應式物件 的 property 時，Ref 物件會自動解構；但是陣列不會，仍然需要加 .value
+- watch(監控參數,callbackFn(newValue,oldValue))
+  要監聽物件裡面的特定屬性，要用function方式返回(這樣才是ref或reactive包裝過後可監控的值)
+  監控參數可以傳array
+- watchEffect(callbackFn)
+  初始會執行一次，可以自扺擋掉他
+  可以關掉他
+
 
 
 ---
@@ -44,3 +55,10 @@ const { ref } = Vue
 - 比較:在子組件直接修改props的值得抱錯:
   Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. 
   避免直接改變 prop，因為每當父組件重新渲染時，值都會被覆蓋。 相反，根據道具的值使用數據或計算屬性。
+
+<!-- 3533 -->
+<!-- 5954 -->
+
+### 【其他】
+- [vite: Make web dev fast again. - Kuro Hsu | MOPCON 2020](https://www.youtube.com/watch?v=cZliOi98OZA)
+- [Kuro Hsu](https://github.com/kurotanshi?tab=repositories)
