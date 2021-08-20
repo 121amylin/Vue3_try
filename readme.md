@@ -40,6 +40,8 @@ const { ref } = Vue
 - watchEffect(callbackFn)
   初始會執行一次，可以自扺擋掉他
   可以關掉他
+- emits
+- toRefs
 
 
 
